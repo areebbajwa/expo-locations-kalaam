@@ -257,6 +257,7 @@ EX_EXPORT_METHOD_AS(geocodeAsync,
                     rejecter:(EXPromiseRejectBlock)reject)
 {
   CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+  geocoder.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
 
   [geocoder geocodeAddressString:address completionHandler:^(NSArray* placemarks, NSError* error){
     if (!error) {
@@ -287,6 +288,7 @@ EX_EXPORT_METHOD_AS(reverseGeocodeAsync,
                     rejecter:(EXPromiseRejectBlock)reject)
 {
   CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+  geocoder.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
   CLLocation *location = [[CLLocation alloc] initWithLatitude:[locationMap[@"latitude"] floatValue] longitude:[locationMap[@"longitude"] floatValue]];
 
   [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray* placemarks, NSError* error){
