@@ -65,6 +65,7 @@ import expo.modules.location.exceptions.LocationUnavailableException;
 import expo.modules.location.taskConsumers.GeofencingTaskConsumer;
 import expo.modules.location.taskConsumers.LocationTaskConsumer;
 import io.nlopez.smartlocation.SmartLocation;
+import io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider;
 import io.nlopez.smartlocation.geocoding.utils.LocationAddress;
 import io.nlopez.smartlocation.location.config.LocationParams;
 import io.nlopez.smartlocation.location.utils.LocationState;
@@ -420,7 +421,7 @@ public class LocationModule extends ExportedModule implements LifecycleEventList
     location.setLongitude((double) locationMap.get("longitude"));
 
     if (Geocoder.isPresent()) {
-      SmartLocation.with(mContext).geocoding()
+      SmartLocation.with(mContext).geocoding(new AndroidGeocodingProvider(Locale.US))
         .reverse(location, (original, addresses) -> {
           List<Bundle> results = new ArrayList<>(addresses.size());
 
