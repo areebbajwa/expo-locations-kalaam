@@ -258,7 +258,7 @@ EX_EXPORT_METHOD_AS(geocodeAsync,
 {
   CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 
-  [geocoder geocodeAddressString:address preferredLocale:[NSLocale localeWithLocaleIdentifier:@"en_US"] completionHandler:^(NSArray* placemarks, NSError* error){
+    [geocoder geocodeAddressString:address inRegion:nil preferredLocale:[NSLocale localeWithLocaleIdentifier:@"en"] completionHandler:^(NSArray* placemarks, NSError* error){
     if (!error) {
       NSMutableArray *results = [NSMutableArray arrayWithCapacity:placemarks.count];
       for (CLPlacemark* placemark in placemarks) {
