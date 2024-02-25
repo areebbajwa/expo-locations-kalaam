@@ -258,7 +258,7 @@ EX_EXPORT_METHOD_AS(geocodeAsync,
 {
   CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 
-    [geocoder geocodeAddressString:address inRegion:nil preferredLocale:[NSLocale localeWithLocaleIdentifier:@"en"] completionHandler:^(NSArray* placemarks, NSError* error){
+  [geocoder geocodeAddressString:address completionHandler:^(NSArray* placemarks, NSError* error){
     if (!error) {
       NSMutableArray *results = [NSMutableArray arrayWithCapacity:placemarks.count];
       for (CLPlacemark* placemark in placemarks) {
@@ -289,7 +289,7 @@ EX_EXPORT_METHOD_AS(reverseGeocodeAsync,
   CLGeocoder *geocoder = [[CLGeocoder alloc] init];
   CLLocation *location = [[CLLocation alloc] initWithLatitude:[locationMap[@"latitude"] floatValue] longitude:[locationMap[@"longitude"] floatValue]];
 
-  [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray* placemarks, NSError* error){
+  [geocoder reverseGeocodeLocation:location preferredLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] completionHandler:^(NSArray* placemarks, NSError* error) {
     if (!error) {
       NSMutableArray *results = [NSMutableArray arrayWithCapacity:placemarks.count];
       for (CLPlacemark* placemark in placemarks) {
